@@ -491,7 +491,7 @@ public class AddressBook {
     private static ArrayList<String[]> getPersonsWithNameContainingAnyKeyword(Collection<String> keywords) {
         final ArrayList<String[]> matchedPersons = new ArrayList<>();
         for (String[] person : getAllPersonsInAddressBook()) {
-            final Set<String> wordsInName = new HashSet<>(convertStringArrayToLowerCase(splitByWhitespace(getNameFromPerson(person))));
+            final Set<String> wordsInName = new HashSet<>(getWordsInName(getNameFromPerson(person)));
             if (!Collections.disjoint(wordsInName, keywords)) {
                 matchedPersons.add(person);
             }
@@ -499,6 +499,15 @@ public class AddressBook {
         return matchedPersons;
     }
 
+    /**
+     * Takes in a String of words and return them separated in a set
+     *
+     * @param name the string which contain the name
+     * @return the name separated into individual words in a set (lower case)
+     */
+    private static Set<String> getWordsInName (String name){
+        return new HashSet<>(convertStringArrayToLowerCase(splitByWhitespace(name)));
+    }
 
     /**
      * Deletes person identified using last displayed index.
