@@ -476,10 +476,10 @@ public class AddressBook {
      * Extracts keywords from the command arguments given for the find persons command.
      *
      * @param findPersonCommandArgs full command args string for the find persons command
-     * @return set of keywords as specified by args
+     * @return set of keywords as specified by args in lower cased
      */
     private static Set<String> extractKeywordsFromFindPersonArgs(String findPersonCommandArgs) {
-        return new HashSet<>(splitByWhitespace(findPersonCommandArgs.trim()));
+        return new HashSet<>(convertStringArrayToLowerCase(splitByWhitespace(findPersonCommandArgs.trim())));
     }
 
     /**
@@ -491,13 +491,14 @@ public class AddressBook {
     private static ArrayList<String[]> getPersonsWithNameContainingAnyKeyword(Collection<String> keywords) {
         final ArrayList<String[]> matchedPersons = new ArrayList<>();
         for (String[] person : getAllPersonsInAddressBook()) {
-            final Set<String> wordsInName = new HashSet<>(splitByWhitespace(getNameFromPerson(person)));
+            final Set<String> wordsInName = new HashSet<>(convertStringArrayToLowerCase(splitByWhitespace(getNameFromPerson(person))));
             if (!Collections.disjoint(wordsInName, keywords)) {
                 matchedPersons.add(person);
             }
         }
         return matchedPersons;
     }
+
 
     /**
      * Deletes person identified using last displayed index.
