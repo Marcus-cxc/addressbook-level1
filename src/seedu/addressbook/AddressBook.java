@@ -1185,5 +1185,17 @@ public class AddressBook {
     private static ArrayList<String> splitByWhitespace(String toSplit) {
         return new ArrayList<>(Arrays.asList(toSplit.trim().split("\\s+")));
     }
-
+    /**
+     * Converts an array of string into its lower cased version
+     *
+     * @param toConvert source ArrayList<String)
+     * @return All string in array converted to lower cased
+     */
+    private static ArrayList<String> convertStringArrayToLowerCase (ArrayList<String> toConvert) {
+        ArrayList<String> convertedArray = new ArrayList<String>();
+        for (String oldString : toConvert) {
+            convertedArray.add(oldString.toLowerCase());
+        }
+        return convertedArray;
+    }
 }
