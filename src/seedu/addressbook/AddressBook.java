@@ -529,9 +529,14 @@ public class AddressBook {
         }
 
         final String[] targetInModel = getPersonByLastVisibleIndex(targetVisibleIndex);
-        return deletePersonFromAddressBook(targetInModel) ? getMessageForSuccessfulDelete(targetInModel) // success
-                : MESSAGE_PERSON_NOT_IN_ADDRESSBOOK; // not found
+        boolean deleteSuccessful = deletePersonFromAddressBook(targetInModel);
 
+        if(deleteSuccessful) {
+            return getMessageForSuccessfulDelete(targetInModel); // success
+        }
+        else {
+            return MESSAGE_PERSON_NOT_IN_ADDRESSBOOK; // not found
+        }
     }
 
     /**
