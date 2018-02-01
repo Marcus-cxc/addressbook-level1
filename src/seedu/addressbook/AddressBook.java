@@ -516,16 +516,26 @@ public class AddressBook {
      * @return feedback display message for the operation result
      */
     private static String executeDeletePerson(String commandArgs) {
-        if (!isDeletePersonArgsValid(commandArgs)) {
+        if (isDeletePersonArgsValid(commandArgs)) {
+
+            final int targetVisibleIndex = extractTargetIndexFromDeletePersonArgs(commandArgs);
+
+            if (isDisplayIndexValidForLastPersonListingView(targetVisibleIndex)) {
+
+                final String[] targetInModel = getPersonByLastVisibleIndex(targetVisibleIndex);
+                return deletePersonFromAddressBook(targetInModel) ? getMessageForSuccessfulDelete(targetInModel) // success
+                        : MESSAGE_PERSON_NOT_IN_ADDRESSBOOK; // not found
+            }
+            else
+            {
+                return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+            }
+        }
+        else
+        {
             return getMessageForInvalidCommandInput(COMMAND_DELETE_WORD, getUsageInfoForDeleteCommand());
         }
-        final int targetVisibleIndex = extractTargetIndexFromDeletePersonArgs(commandArgs);
-        if (!isDisplayIndexValidForLastPersonListingView(targetVisibleIndex)) {
-            return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-        }
-        final String[] targetInModel = getPersonByLastVisibleIndex(targetVisibleIndex);
-        return deletePersonFromAddressBook(targetInModel) ? getMessageForSuccessfulDelete(targetInModel) // success
-                                                          : MESSAGE_PERSON_NOT_IN_ADDRESSBOOK; // not found
+
     }
 
     /**
