@@ -172,7 +172,7 @@ Jane Doe p/12346758 e/jane@gmail.com
 ```
 
 All person data are loaded to memory at start up and written to the file after any command that mutates data.
-In-memory data are held in a `ArrayList<String[]>` where each `String[]` object represents a person.
+In-memory data are held in a `ArrayList<HashMap<PERSON_PROPERTY,String>>` where each `HashMap<PERSON_PROPERTY,String>` object represents a person.
 
 
 ## Testing
@@ -268,21 +268,21 @@ Learn [how to automate testing of CLIs](https://se-edu.github.io/se-book/testing
 
 ## Use Collections `[LO-Collections]`
 
-Note how the `AddressBook` class uses `ArrayList<>` class (from the Java `Collections` library) to store a list of `String` or `String[]` objects.
+Note how the `AddressBook` class uses `ArrayList<>` class (from the Java `Collections` library) to store a list of `String` or `HashMap<PERSON_PROPERTY,String>` objects.
 
 Learn [how to use some Java `Collections` classes, such as `ArrayList` and `HashMap`](https://se-edu.github.io/se-book/javaTools/collections/)
 
 
 #### Exercise: Use `HashMap`
 
-Currently, a person's details are stored as a `String[]`. Modify the code to use a `HashMap<String, String>` instead.
+Currently, a person's details are stored as a `HashMap<PERSON_PROPERTY,String>`. Modify the code to use a `HashMap<String, String>` instead.
 A sample code snippet is given below.
 
 ```java
 private static final String PERSON_PROPERTY_NAME = "name";
 private static final String PERSON_PROPERTY_EMAIL = "email";
 ...
-HashMap<String,String> john = new HashMap<>();
+HashMap<PERSON_PROPERTY,String> john = new HashMap<>();
 john.put(PERSON_PROPERTY_NAME, "John Doe");
 john.put(PERSON_PROPERTY_EMAIL, "john.doe@email.com");
 //etc.
